@@ -27,7 +27,7 @@ class Codechef:
         return data
 
     @staticmethod
-    def get_problem(level):
+    def get_problem_from_level(level):
         url = "https://www.codechef.com/problems" + '/' + level  # checkcase on codechef
         soup = Codechef.get_html(url)
 
@@ -107,13 +107,13 @@ class Codechef:
         data = {}
         text = str(soup.find_all('small')[-1].text)
         statement = text.split(" ").pop()
-        statement = statement.replace(")","")
+        statement = statement.replace(")", "")
         data["HighestRating"] = statement
 
-        overall_rating = soup.find_all('div',{'class': 'rating-number'})[0].text
+        overall_rating = soup.find_all('div', {'class': 'rating-number'})[0].text
         data["OverallRating"] = overall_rating
 
-        ranks = soup.find_all('ul',{'class': 'inline-list'})[1]
+        ranks = soup.find_all('ul', {'class': 'inline-list'})[1]
         rks = ranks.find_all('a')
         data["GlobalRank"] = rks[0].text
         data["CountryRank"] = rks[1].text
@@ -129,24 +129,41 @@ class Codechef:
 
 
 code = Codechef()
-print("\n\t\t\t ****WELCOME TO CODECHEF DATA EXTRACTOR****\n\n\t\t1. To get Profile Data of "
-      "user\n\t\t2. To get Rating of the user\n\t\t3. To get Problem details\n\t\t4. To get Problem of different "
-      "levels\n\t\t5. To get information regarding Contests")
-x = int(input("\n\t\tSELECT ANY NUMBER: "))
+print("\n\t\t\t ****\tWELCOME TO CODECHEF DATA EXTRACTOR\t****")
 
+while True:
+    print("\n\n\t\t1. To get Profile Data of "
+          "user\n\t\t2. To get Rating of the user\n\t\t3. To get Problem details\n\t\t4. To get Problem of different "
+          "levels\n\t\t5. To get information regarding Contests")
+    option = int(input("\n\t\tSELECT ANY NUMBER: "))
 
+    if option == 1:
+        username = input("\n\t\tENTER USERNAME: ")
+        profile_data = code.get_profile_data(username)
+        print(profile_data)
+    elif option == 2:
+        username = input("\n\t\tENTER USERNAME: ")
+        user_rating = code.get_rating(username)
+        print(user_rating)
+    elif option == 3:
+        problem_code = input("\n\t\tENTER PROBLEM CODE: ")
+        problem_data = code.get_problem_details(problem_code)
+        print(problem_data)
+    elif option == 4:
+        problem_level = input("\n\t\tENTER LEVEL OF PROBLEM: (school,easy,medium,hard,challenge) ")
+        problems = code.get_problem_from_level(problem_level)
+        print(problems)
+    elif option == 5:
+        contest_data_time = input("\n\t\tENTER TIME: (past,present or future) ")
+        contest_details = code.get_contest(contest_data_time)
+        print(contest_details)
+    else:
+        print("\t\t\t****************\n\t\t\t*INVALID NUMBER*\n\t\t\t****************")
 
+    choice = int(input("\n\tPress 1 to continue : "))
+    if choice != 1:
+        break
 
-
-# temp = code.get_profile_data("aman_bhawsar")
-# print(temp)
-# temp = code.get_rating("aman_bhawsar")
-# print(temp)
-# temp = code.get_problem_details("BSTOPS")
-# print(temp)
-# temp = code.get_problem("hard")
-# print(temp)
-# temp = code.get_contest("present")
-# print(temp)
+print("\n\t\tCODE YOUR FUTURE  :-) \t HAVE A NICE DAY: ")
 
 # TODO: later check for invalid conditions in case data is not present there
