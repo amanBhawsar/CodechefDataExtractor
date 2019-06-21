@@ -129,13 +129,24 @@ class Codechef:
 
 
 code = Codechef()
-temp = code.get_problem_details("BSTOPS")
-print(temp)
-temp = code.get_problem("hard")
-print(temp)
-temp = code.get_contest("present")
-print(temp)
-temp = code.get_profile_data("aman_bhawsar")
-print(temp)
-temp = code.get_rating("aman_bhawsar")
-print(temp)
+print("\n\t\t\t ****WELCOME TO CODECHEF DATA EXTRACTOR****\n\n\t\t1. To get Profile Data of "
+      "user\n\t\t2. To get Rating of the user\n\t\t3. To get Problem details\n\t\t4. To get Problem of different "
+      "levels\n\t\t5. To get information regarding Contests")
+x = int(input("\n\t\tSELECT ANY NUMBER: "))
+
+
+
+
+
+# temp = code.get_profile_data("aman_bhawsar")
+# print(temp)
+# temp = code.get_rating("aman_bhawsar")
+# print(temp)
+# temp = code.get_problem_details("BSTOPS")
+# print(temp)
+# temp = code.get_problem("hard")
+# print(temp)
+# temp = code.get_contest("present")
+# print(temp)
+
+# TODO: later check for invalid conditions in case data is not present there
